@@ -519,6 +519,19 @@ reporting, ...</li>
 <!-- the project authors when diagnosing bugs is pretty invaluable. --></section>
   </div>
   <div class="slide hidden" id="slide-5">
+    <section class="slide-content"><h3 id="extending-our-framework">extending our framework</h3>
+<ul>
+<li><p>Started out using our normal webdriver bindings instead of a custom
+Appium client</p>
+</li>
+<li><p>Exactly the same Gherkin step rules</p>
+</li>
+<li><p>&quot;Pretty much&quot; drop in!</p>
+</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-6">
     <section class="slide-content"><h3 id="installation-and-set-up">installation and set up</h3>
 <!-- So, if you're just getting started with installing Appium, there -->
 <!-- are definitely a lot of moving parts. If you use the -->
@@ -538,13 +551,12 @@ reporting, ...</li>
     app                 =&gt; &#39;/path/to.apk&#39;,
     appActivity         =&gt; &#39;.application.MainActivity&#39;,
     appPackage          =&gt; &#39;com.your.android.app&#39;,
-    deviceName          =&gt; &#39;Android Emulator&#39;,
     platformName        =&gt; &#39;Android&#39;,
     platformVersion     =&gt; &#39;4.4&#39;
 };</code></pre>
 <pre><code>my $ios = {
     app             =&gt; &#39;http://remote.path/to.app&#39;,
-    deviceName      =&gt; &#39;iPhone Simulator&#39;,
+    deviceName      =&gt; &#39;iPhone - Simulator - iOS 7.1&#39;,
     platformName    =&gt; &#39;iOS&#39;,
     platformVersion =&gt; &#39;7.1&#39;
 };</code></pre>
@@ -557,7 +569,7 @@ reporting, ...</li>
 <!-- reliable, but managing them by hand can definitely be error -->
 <!-- prone. --></section>
   </div>
-  <div class="slide hidden" id="slide-6">
+  <div class="slide hidden" id="slide-7">
     <section class="slide-content"><h3 id="check-out-them-docs">check out them docs</h3>
 <ul>
 <li><p>I&#39;m really excited about the appium docs these days</p>
@@ -571,7 +583,7 @@ reporting, ...</li>
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-7">
+  <div class="slide hidden" id="slide-8">
     <section class="slide-content"><h3 id="use-the-right-tool-for-the-job">use the right tool for the job</h3>
 <ul>
 <li><p>UserAgent spoofing ? because some of our users are on Windows, but
@@ -582,18 +594,18 @@ also because it may be significantly easier to set up.</p>
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-8">
+  <div class="slide hidden" id="slide-9">
     <section class="slide-content"><h3 id="play-with-appium-app-appium-">play with Appium.app &amp; <code>appium</code></h3>
 </section>
   </div>
-  <div class="slide hidden" id="slide-9">
+  <div class="slide hidden" id="slide-10">
     <section class="slide-content"><h3 id="expect-to-get-familiar-with-arc-or-the-inspector">expect to get familiar with arc! or the inspector</h3>
 <ul>
 <li>or both!</li>
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-10">
+  <div class="slide hidden" id="slide-11">
     <section class="slide-content"><h3 id="don-t-check-options-you-don-t-understand">don&#39;t check options you don&#39;t understand</h3>
 <ul>
 <li>TODO: add image here</li>
@@ -606,7 +618,7 @@ also because it may be significantly easier to set up.</p>
 <!-- do it with," and idly checked these boxes and promptly forgot -->
 <!-- about it. A week later I came back to Appium and the inspector--></section>
   </div>
-  <div class="slide hidden" id="slide-11">
+  <div class="slide hidden" id="slide-12">
     <section class="slide-content"><h3 id="online-resources">online resources</h3>
 <ul>
 <li>appium-discuss</li>
@@ -614,7 +626,7 @@ also because it may be significantly easier to set up.</p>
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-12">
+  <div class="slide hidden" id="slide-13">
     <section class="slide-content"><h3 id="one-script-to-rule-them-all-">one script to rule them all?</h3>
 <ul>
 <li><p>can we use the same script for iOS and android?</p>
@@ -624,7 +636,7 @@ also because it may be significantly easier to set up.</p>
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-13">
+  <div class="slide hidden" id="slide-14">
     <section class="slide-content"><div class="author">
   <h1 class="name">Daniel Gempesaw</h1>
     <h3 class="twitter">

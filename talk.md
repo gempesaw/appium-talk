@@ -124,6 +124,17 @@ controls: true
 
 --
 
+### extending our framework
+
+* Started out using our normal webdriver bindings instead of a custom
+  Appium client
+
+* Exactly the same Gherkin step rules
+
+* "Pretty much" drop in!
+
+--
+
 ### installation and set up
 
 <!-- So, if you're just getting started with installing Appium, there -->
@@ -146,7 +157,6 @@ my $android = {
     app                 => '/path/to.apk',
     appActivity         => '.application.MainActivity',
     appPackage          => 'com.your.android.app',
-    deviceName          => 'Android Emulator',
     platformName        => 'Android',
     platformVersion     => '4.4'
 };
@@ -155,7 +165,7 @@ my $android = {
 ```
 my $ios = {
     app             => 'http://remote.path/to.app',
-    deviceName      => 'iPhone Simulator',
+    deviceName      => 'iPhone - Simulator - iOS 7.1',
     platformName    => 'iOS',
     platformVersion => '7.1'
 };
