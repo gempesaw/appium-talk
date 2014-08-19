@@ -2,12 +2,13 @@ title: Teaching our Webdriver Framework new Appium tricks
 author:
   name: Daniel Gempesaw
   twitter: dgempesaw
-  url: http://blog.danielgempesaw.com
+  url: http://danielgempesaw.com/appium-talk
 output: index.html
 controls: true
 
 --
 
+# The road to Appium
 ## Teaching our Webdriver Framework new Appium tricks
 
 --
@@ -105,10 +106,51 @@ controls: true
 
 --
 
-### online resources
+### installation and set up
 
-* appium-discuss
-* slackchat
+<!-- So, if you're just getting started with installing Appium, there -->
+<!-- are definitely a lot of moving parts. If you use the -->
+<!-- Appium.app at first, a lot of those issues are taken care of, but -->
+<!-- if you're building out your framework, you'll need to address -->
+<!-- them. The `appium-doctor` tool is super useful and helps you get -->
+<!-- everything installed, similar to homebrew's `brew doctor`. There -->
+<!-- are a lot of steps to get through, but most of them are pretty -->
+<!-- simple, like pasting bash commands. Google and thickheaded -->
+<!-- persistence is definitely key here!  -->
+
+* Setup can be little involved. `appium-doctor` & some deep breathing!
+* Read up on the [desired capabilities][caps]
+
+[caps]: http://appium.io/slate/en/master/#appium-server-capabilities
+
+```
+my $android = {
+    app                 => '/path/to.apk',
+    appActivity         => '.application.MainActivity',
+    appPackage          => 'com.your.android.app',
+    deviceName          => 'Android Emulator',
+    platformName        => 'Android',
+    platformVersion     => '4.4'
+};
+```
+
+```
+my $ios = {
+    app             => 'http://remote.path/to.app',
+    deviceName      => 'iPhone Simulator',
+    platformName    => 'iOS',
+    platformVersion => '7.1'
+};
+```
+
+<!-- First things first - we can't start an appium session without -->
+<!-- desired capabilities, so we'll start here too. If your bindings -->
+<!-- have a Capabilities class, it's a very good idea to take -->
+<!-- advantage of it, or roll your own class if you'd like. A lot of -->
+<!-- our early issues were just problems sorting out the caps. With -->
+<!-- the recent Appium milestones, the caps have gotten a lot more -->
+<!-- reliable, but managing them by hand can definitely be error -->
+<!-- prone. -->
 
 --
 
@@ -154,3 +196,11 @@ also because it may be significantly easier to set up.
 <!-- detrimental. Give me all the information, I'll figure out what to -->
 <!-- do it with," and idly checked these boxes and promptly forgot -->
 <!-- about it. A week later I came back to Appium and the inspector-->
+
+--
+
+### online resources
+
+* appium-discuss
+* slackchat
+
