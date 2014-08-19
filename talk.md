@@ -204,3 +204,10 @@ also because it may be significantly easier to set up.
 * appium-discuss
 * slackchat
 
+--
+
+### one script to rule them all?
+
+* can we use the same script for iOS and android?
+
+* probably delete this slide
