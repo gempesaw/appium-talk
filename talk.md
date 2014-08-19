@@ -83,7 +83,7 @@ controls: true
 
 ### huh? what's appium
 
-* mobile is the new focus!
+* mobile is the new focus! so, how do we test it?
 
 <!-- Earlier this year, Sharecare decided to prioritize mobile - both -->
 <!-- for our website and also in the form of new mobile apps. move -->
@@ -91,18 +91,24 @@ controls: true
 <!-- assess the mobile testing frameworks and come up with a workable -->
 <!-- solution. -->
 
-* Creating apps for Android and iOS; QA engineers on OS X & Windows
+* Need to test Android and iOS apps; QA engineers on OS X & Windows
 
 <!-- Like everyone else, we looked at a number of different -->
-<!-- options. This might be where everyone would reference the 'Appium -->
-<!-- in space' slide that lists the different frameworks, with Appium -->
-<!-- as the only? or one of the few? options that spanned both Android -->
-<!-- and iOS. -->
+<!-- options. We looked briefly into KiF, and we surveyed our options -->
+<!-- as well. Appium fit us pretty well for a few reasons  -->
 
-* TODO: add image here
+* Webdriver investment and cross-platform requirements? Appium!
 
-<!-- but we were always very interested in Appium ever since hearing -->
-<!-- about it at SeConf2013 and elsewhere. -->
+<!-- In the QA group, we had been keeping tabs on Appium since a few -->
+<!-- months before the 2013 SeConf, but our devs hadn't heard of -->
+<!-- it. We looked into KiF and surveyed our other options, but Appium -->
+<!-- seemed like the obvious choice the whole time. -->
+
+<!-- Since it'd be the QA engineers in charge of testing, we'd need to -->
+<!-- be the ones familiar with the test framework - while we might not -->
+<!-- be developers by name, our QA engineers all possess the analytic -->
+<!-- capabilities to . Working with one tool for both iOS and -->
+<!-- Android would hopefully make troubleshooting much easier. -->
 
 --
 
