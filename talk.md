@@ -37,7 +37,9 @@ controls: true
 
 <!-- I also moved into the maintainer role for the Perl Webdriver -->
 <!-- bindings, and I just started working on the perl Appium bindings -->
-<!-- a few weeks ago. -->
+<!-- a few weeks ago. Also, if there are any Emacs users in the room, -->
+<!-- I maintain a couple emacs packages, including -->
+<!-- ido-vertical-mode. Any bugs in that are completely my fault :D-->
 
 [srd]: https://metacpan.org/pod/Selenium::Remote::Driver
 [Appium]: https://metacpan.org/pod/Appium
