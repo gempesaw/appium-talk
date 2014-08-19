@@ -401,7 +401,8 @@ pre .chunk {
   </div>
 
   <div class="slide" id="slide-1">
-    <section class="slide-content"><h2 id="teaching-our-webdriver-framework-new-appium-tricks">Teaching our Webdriver Framework new Appium tricks</h2>
+    <section class="slide-content"><h1 id="the-road-to-appium">The road to Appium</h1>
+<h2 id="teaching-our-webdriver-framework-new-appium-tricks">Teaching our Webdriver Framework new Appium tricks</h2>
 </section>
   </div>
   <div class="slide hidden" id="slide-2">
@@ -476,7 +477,7 @@ reporting, ...</li>
   <div class="slide hidden" id="slide-4">
     <section class="slide-content"><h3 id="huh-what-s-appium">huh? what&#39;s appium</h3>
 <ul>
-<li>mobile is the new focus!</li>
+<li>mobile is the new focus! so, how do we test it?</li>
 </ul>
 <!-- Earlier this year, Sharecare decided to prioritize mobile - both -->
 <!-- for our website and also in the form of new mobile apps. move -->
@@ -485,27 +486,64 @@ reporting, ...</li>
 <!-- solution. -->
 
 <ul>
-<li>Creating apps for Android and iOS; QA engineers on OS X &amp; Windows</li>
+<li>Need to test Android and iOS apps; QA engineers on OS X &amp; Windows</li>
 </ul>
 <!-- Like everyone else, we looked at a number of different -->
-<!-- options. This might be where everyone would reference the 'Appium -->
-<!-- in space' slide that lists the different frameworks, with Appium -->
-<!-- as the only? or one of the few? options that spanned both Android -->
-<!-- and iOS. -->
+<!-- options. We looked briefly into KiF, and we surveyed our options -->
+<!-- as well. Appium fit us pretty well for a few reasons  -->
 
 <ul>
-<li>TODO: add image here</li>
+<li>Webdriver investment and cross-platform requirements? Appium!</li>
 </ul>
-<!-- but we were always very interested in Appium ever since hearing -->
-<!-- about it at SeConf2013 and elsewhere. --></section>
+<!-- In the QA group, we had been keeping tabs on Appium since a few -->
+<!-- months before the 2013 SeConf, but our devs hadn't heard of -->
+<!-- it. We looked into KiF and surveyed our other options, but Appium -->
+<!-- seemed like the obvious choice the whole time. -->
+
+<!-- Since it'd be the QA engineers in charge of testing, we'd need to -->
+<!-- be the ones familiar with the test framework - while we might not -->
+<!-- be developers by name, our QA engineers all possess the analytic -->
+<!-- capabilities to . Working with one tool for both iOS and -->
+<!-- Android would hopefully make troubleshooting much easier. --></section>
   </div>
   <div class="slide hidden" id="slide-5">
-    <section class="slide-content"><h3 id="online-resources">online resources</h3>
+    <section class="slide-content"><h3 id="installation-and-set-up">installation and set up</h3>
+<!-- So, if you're just getting started with installing Appium, there -->
+<!-- are definitely a lot of moving parts. If you use the -->
+<!-- Appium.app at first, a lot of those issues are taken care of, but -->
+<!-- if you're building out your framework, you'll need to address -->
+<!-- them. The `appium-doctor` tool is super useful and helps you get -->
+<!-- everything installed, similar to homebrew's `brew doctor`. There -->
+<!-- are a lot of steps to get through, but most of them are pretty -->
+<!-- simple, like pasting bash commands. Google and thickheaded -->
+<!-- persistence is definitely key here!  -->
+
 <ul>
-<li>appium-discuss</li>
-<li>slackchat</li>
+<li>Setup can be little involved. <code>appium-doctor</code> &amp; some deep breathing!</li>
+<li>Read up on the <a href="http://appium.io/slate/en/master/#appium-server-capabilities">desired capabilities</a></li>
 </ul>
-</section>
+<pre><code>my $android = {
+    app                 =&gt; &#39;/path/to.apk&#39;,
+    appActivity         =&gt; &#39;.application.MainActivity&#39;,
+    appPackage          =&gt; &#39;com.your.android.app&#39;,
+    deviceName          =&gt; &#39;Android Emulator&#39;,
+    platformName        =&gt; &#39;Android&#39;,
+    platformVersion     =&gt; &#39;4.4&#39;
+};</code></pre>
+<pre><code>my $ios = {
+    app             =&gt; &#39;http://remote.path/to.app&#39;,
+    deviceName      =&gt; &#39;iPhone Simulator&#39;,
+    platformName    =&gt; &#39;iOS&#39;,
+    platformVersion =&gt; &#39;7.1&#39;
+};</code></pre>
+<!-- First things first - we can't start an appium session without -->
+<!-- desired capabilities, so we'll start here too. If your bindings -->
+<!-- have a Capabilities class, it's a very good idea to take -->
+<!-- advantage of it, or roll your own class if you'd like. A lot of -->
+<!-- our early issues were just problems sorting out the caps. With -->
+<!-- the recent Appium milestones, the caps have gotten a lot more -->
+<!-- reliable, but managing them by hand can definitely be error -->
+<!-- prone. --></section>
   </div>
   <div class="slide hidden" id="slide-6">
     <section class="slide-content"><h3 id="check-out-them-docs">check out them docs</h3>
@@ -557,13 +595,31 @@ also because it may be significantly easier to set up.</p>
 <!-- about it. A week later I came back to Appium and the inspector--></section>
   </div>
   <div class="slide hidden" id="slide-11">
+    <section class="slide-content"><h3 id="online-resources">online resources</h3>
+<ul>
+<li>appium-discuss</li>
+<li>slackchat</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-12">
+    <section class="slide-content"><h3 id="one-script-to-rule-them-all-">one script to rule them all?</h3>
+<ul>
+<li><p>can we use the same script for iOS and android?</p>
+</li>
+<li><p>probably delete this slide</p>
+</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-13">
     <section class="slide-content"><div class="author">
   <h1 class="name">Daniel Gempesaw</h1>
     <h3 class="twitter">
       <a href="http://twitter.com/@dgempesaw">@dgempesaw</a>
     </h3>
     <h3 class="url">
-      <a href="http://blog.danielgempesaw.com">http://blog.danielgempesaw.com</a>
+      <a href="http://danielgempesaw.com/appium-talk">http://danielgempesaw.com/appium-talk</a>
     </h3>
 </div>
 </section>
