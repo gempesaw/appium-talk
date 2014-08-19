@@ -99,7 +99,7 @@ controls: true
 <!-- options. We looked briefly into KiF, and we surveyed our options -->
 <!-- as well. Appium fit us pretty well for a few reasons  -->
 
-* Webdriver investment and cross-platform requirements? Appium!
+* Our Webdriver investment + cross-platform testing requirements = Appium!
 
 <!-- In the QA group, we had been keeping tabs on Appium since a few -->
 <!-- months before the 2013 SeConf, but our devs hadn't heard of -->
@@ -108,9 +108,19 @@ controls: true
 
 <!-- Since it'd be the QA engineers in charge of testing, we'd need to -->
 <!-- be the ones familiar with the test framework - while we might not -->
-<!-- be developers by name, our QA engineers all possess the analytic -->
-<!-- capabilities to . Working with one tool for both iOS and -->
-<!-- Android would hopefully make troubleshooting much easier. -->
+<!-- have developer in our title, our QA engineers all possess the analytic -->
+<!-- capabilities to code in Gherkin pseudo language for testing -->
+<!-- browsers. We wanted to re-use those same abstractions and make -->
+<!-- things easy for our QA group to transition to and from mobile testing. -->
+
+<!-- Working with one tool for both iOS and Android would also make -->
+<!-- troubleshooting much easier. Also, using Appium, we'd also get -->
+<!-- all of our existing infrastructure for free - reporting, -->
+<!-- dashboards, monitoring, etc. -->
+
+<!-- Additionally, the fact that Appium was open source made a big -->
+<!-- difference for us as well - being able to interact directly with -->
+<!-- the project authors when diagnosing bugs is pretty invaluable. -->
 
 --
 
