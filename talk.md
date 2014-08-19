@@ -8,7 +8,6 @@ controls: true
 
 --
 
-# The road to Appium
 ## Teaching our Webdriver Framework new Appium tricks
 
 --
@@ -91,7 +90,67 @@ controls: true
 <!-- assess the mobile testing frameworks and come up with a workable -->
 <!-- solution. -->
 
-* Alternatives vs Webdriver investment
+* Creating apps for Android and iOS; QA engineers on OS X & Windows
 
-<!-- Like everyone else, we looked at a number of different options, -->
-<!-- and Appium came out as the clear choice.  -->
+<!-- Like everyone else, we looked at a number of different -->
+<!-- options. This might be where everyone would reference the 'Appium -->
+<!-- in space' slide that lists the different frameworks, with Appium -->
+<!-- as the only? or one of the few? options that spanned both Android -->
+<!-- and iOS. -->
+
+* TODO: add image here
+
+<!-- but we were always very interested in Appium ever since hearing -->
+<!-- about it at SeConf2013 and elsewhere. -->
+
+--
+
+### online resources
+
+* appium-discuss
+* slackchat
+
+--
+
+### check out them docs
+
+* I'm really excited about the appium docs these days
+
+- slate
+- language toggler
+- fancy
+- looks good!
+- (better than webdriver???)
+
+--
+
+### use the right tool for the job
+
+* UserAgent spoofing ? because some of our users are on Windows, but
+also because it may be significantly easier to set up.
+
+* webdriver browser size
+
+--
+
+### play with Appium.app & `appium`
+
+--
+
+### expect to get familiar with arc! or the inspector
+
+* or both!
+
+--
+
+### don't check options you don't understand
+
+* TODO: add image here
+
+<!-- In one of the older releases of the appium inspector, I was just -->
+<!-- clicking around and saw these two options up here. I thought to -->
+<!-- myself, "oh, I'm pretty advanced at Appium, I'm a power user, -->
+<!-- they wouldn't put something here that would be too -->
+<!-- detrimental. Give me all the information, I'll figure out what to -->
+<!-- do it with," and idly checked these boxes and promptly forgot -->
+<!-- about it. A week later I came back to Appium and the inspector-->
