@@ -617,7 +617,7 @@ reporting, ...</li>
 <li>control your feedback loop!</li>
 </ul>
 <p><code>gradle clean assemble</code></p>
-<pre><code>xcodebuild -sdk iphonesimulator7.1 TARGETED_DEVICE_FAMILY=1 \
+<pre><code class="lang-bash">xcodebuild -sdk iphonesimulator7.1 TARGETED_DEVICE_FAMILY=1 \
            -arch i386 -config Release | xcpretty</code></pre>
 <!-- I personally prefer to be building on the command line, and these -->
 <!-- are the settings that work for me and my projects. But, there's -->
@@ -644,18 +644,18 @@ reporting, ...</li>
 <li>Setup can be little involved. <code>appium-doctor</code> &amp; some deep breathing!</li>
 <li>Read up on the <a href="http://appium.io/slate/en/master/#appium-server-capabilities">desired capabilities</a></li>
 </ul>
-<pre><code>my $android = {
-    app                 =&gt; &#39;/path/to.apk&#39;,
-    appActivity         =&gt; &#39;.application.MainActivity&#39;,
-    appPackage          =&gt; &#39;com.your.android.app&#39;,
-    platformName        =&gt; &#39;Android&#39;,
-    platformVersion     =&gt; &#39;4.4&#39;
+<pre><code class="lang-perl"><span class="keyword">my</span> <span class="variable">$android</span> = {
+    <span class="string">app             =&gt;</span> <span class="string">'/path/to.apk'</span>,
+    <span class="string">appActivity     =&gt;</span> <span class="string">'.application.MainActivity'</span>,
+    <span class="string">appPackage      =&gt;</span> <span class="string">'com.your.android.app'</span>,
+    <span class="string">platformName    =&gt;</span> <span class="string">'Android'</span>,
+    <span class="string">platformVersion =&gt;</span> <span class="string">'4.4'</span>
 };</code></pre>
-<pre><code>my $ios = {
-    app             =&gt; &#39;http://remote.path/to.app&#39;,
-    deviceName      =&gt; &#39;iPhone Simulator&#39;,
-    platformName    =&gt; &#39;iOS&#39;,
-    platformVersion =&gt; &#39;7.1&#39;
+<pre><code class="lang-perl"><span class="keyword">my</span> <span class="variable">$ios</span> = {
+    <span class="string">app             =&gt;</span> <span class="string">'http://remote.path/to.app'</span>,
+    <span class="string">deviceName      =&gt;</span> <span class="string">'iPhone Simulator'</span>,
+    <span class="string">platformName    =&gt;</span> <span class="string">'iOS'</span>,
+    <span class="string">platformVersion =&gt;</span> <span class="string">'7.1'</span>
 };</code></pre>
 <!-- First things first - we can't start an appium session without -->
 <!-- desired capabilities, so we'll start here too. If your bindings -->
@@ -682,6 +682,16 @@ reporting, ...</li>
 <li><p>use the right tool for the job</p>
 </li>
 </ul>
+<pre><code class="lang-bash">$ appium
+info: Welcome to Appium v1.2.0 (REV e53f49c706a25242e66d36685c268b599cc18da5)
+info: Appium REST http interface listener started on 0.0.0.0:4723
+debug: Non-default server args: {<span class="string">"fullReset"</span>:<span class="literal">true</span>,<span class="string">"logNoColors"</span>:<span class="literal">true</span>,<span class="string">"avd"</span>:<span class="string">"appium"</span>}
+info: LogLevel: debug
+info: --&gt; GET /wd/hub/status {}
+debug: Appium request initiated at /wd/hub/status
+debug: Request received with params: {}
+debug: Responding to client with success: {<span class="string">"status"</span>:0,<span class="string">"value"</span>:{<span class="string">"build"</span>:{<span class="string">"version"</span>:<span class="string">"1.2.0"</span>,<span class="string">"revision"</span>:<span class="string">"e53f49c706a25242e66d36685c268b599cc18da5"</span>}}}
+info: &lt;-- GET /wd/hub/status 200 4.053 ms - 104 {<span class="string">"status"</span>:0,<span class="string">"value"</span>:{<span class="string">"build"</span>:{<span class="string">"version"</span>:<span class="string">"1.2.0"</span>,<span class="string">"revision"</span>:<span class="string">"e53f49c706a25242e66d36685c268b599cc18da5"</span>}}}</code></pre>
 <!-- This kind of falls under using the right tool for the job - when -->
 <!-- I'm authoring a new test, I'm using the GUI app and the inspector -->
 <!-- to drill down through the app and work out the flows. But, when -->
@@ -690,18 +700,18 @@ reporting, ...</li>
 <!-- somewhere instead. --></section>
   </div>
   <div class="slide hidden" id="slide-10">
-    <section class="slide-content"><h3 id="get-familiar-with-arc-and-or-the-inspector">get familiar with <code>arc</code>! and/or the inspector</h3>
+    <section class="slide-content"><h3 id="get-familiar-with-the-inspector-and-or-arc-">get familiar with the inspector! and/or <code>arc</code></h3>
 <!-- and, speaking of the inspector, we'll definitely need to be -->
 <!-- prepared to get pretty familiar with it. The inspector from the -->
 <!-- GUI app is like the DevTools console in Chrome or Firefox - it's -->
 <!-- your map to your application. It's got a few quirks but using the -->
 <!-- preview pane has become indispensable for generating locators and -->
 <!-- authoring scripts. -->
+<img src="images/inspector.png" width="580px" />
 
-<ul>
-<li><code>gem install appium_console</code>, <a href="http://appium.io/slate/en/tutorial/ios.html?ruby#appium-ruby-console">(additional docs)</a></li>
-</ul>
-<p><img src="images/inspector.png" width="580px" /></p>
+<br />
+<code>gem install appium_console</code>, <a href="http://appium.io/slate/en/tutorial/ios.html?ruby#appium-ruby-console">(additional docs)</a>
+
 <!-- Another option is to use the appium_console and its associated -->
 <!-- executable `arc`. ARC is doubly helpful if you're using the ruby -->
 <!-- bindings, as the commands issued to arc transfer right over to -->
@@ -713,10 +723,8 @@ reporting, ...</li>
 <!-- tool, and I've found it to be very useful as well. --></section>
   </div>
   <div class="slide hidden" id="slide-11">
-    <section class="slide-content"><h3 id="don-t-check-options-you-don-t-understand">don&#39;t check options you don&#39;t understand</h3>
-<ul>
-<li>TODO: add image here</li>
-</ul>
+    <section class="slide-content"><h3 id="don-t-check-options-you-don-t-understand-and-then-forget">don&#39;t check options you don&#39;t understand and then forget</h3>
+<p><img src="images/show-invisible.png" alt="show invisible"></p>
 <!-- In one of the older releases of the appium inspector, I was just -->
 <!-- clicking around and saw these two options up here. I thought to -->
 <!-- myself, "oh, I'm pretty advanced at Appium, I'm a power user, -->
@@ -729,9 +737,56 @@ reporting, ...</li>
 <!-- center and I couldn't click through to anything. Then you'll have -->
 <!-- to go and ask google things like "the red boxes in the inspector -->
 <!-- aren't where they're supposed to be" and google won't have any -->
-<!-- clue what you're talking about, and it'll be a mess all around. --></section>
+<!-- clue what you're talking about, and it'll be a mess all -->
+<!-- around. --></section>
   </div>
   <div class="slide hidden" id="slide-12">
+    <section class="slide-content"><h3 id="ios-specific-items">iOS specific items</h3>
+<ul>
+<li><p>Use accessibilityIdentifier!</p>
+</li>
+<li><p>You can resize the iOS emulator ⌘ - 1, ⌘ - 2, ⌘ - 3</p>
+</li>
+</ul>
+<p><img src="images/ios-100.png" height="300px" />
+<img src="images/ios-75.png" height="300px" />
+<img src="images/ios-50.png" height="300px" /></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-13">
+    <section class="slide-content"><h3 id="ios-specific-items">iOS specific items</h3>
+<ul>
+<li>Keep it on top!</li>
+</ul>
+<p><img src="images/stay-in-front.png" alt="stay in front"></p>
+<ul>
+<li>Real iOS device? needs a provisioning profile, UDID, .ipa ... <a href="http://appium.io/slate/en/master/#appium-on-real-ios-devices">(docs)</a></li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-14">
+    <section class="slide-content"><h3 id="android-specific-items">Android specific items</h3>
+<ul>
+<li>Issues re-using Android emulators</li>
+</ul>
+<pre><code class="lang-bash">TARGET=android-19
+ABI=x86
+NAME=appium-avd
+
+<span class="keyword">echo</span> <span class="string">"Overwriting &amp; creating new emulator..."</span>
+<span class="keyword">echo</span> no | android create avd --force -n <span class="variable">$NAME</span> -t <span class="variable">$TARGET</span> --abi <span class="variable">$ABI</span>
+<span class="comment"># emulator @$NAME &amp;</span></code></pre>
+<ul>
+<li>Headless android dependency install</li>
+</ul>
+<pre><code class="lang-bash">(<span class="keyword">while</span> :
+<span class="keyword">do</span>
+  <span class="keyword">echo</span> <span class="string">'y'</span>
+  sleep 2
+<span class="keyword">done</span>) | android update sdk --no-ui --filter platform-tool,android-19,extra,build-tools-19.1.0</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-15">
     <section class="slide-content"><h3 id="additional-resources">additional resources</h3>
 <ul>
 <li><p>official documentation: <a href="http://appium.io/slate/en/master/">http://appium.io/slate/en/master/</a></p>
@@ -745,7 +800,7 @@ reporting, ...</li>
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-13">
+  <div class="slide hidden" id="slide-16">
     <section class="slide-content"><div class="author">
   <h1 class="name">Daniel Gempesaw</h1>
     <h3 class="twitter">

@@ -219,7 +219,7 @@ controls: true
 
 `gradle clean assemble`
 
-```
+```bash
 xcodebuild -sdk iphonesimulator7.1 TARGETED_DEVICE_FAMILY=1 \
            -arch i386 -config Release | xcpretty
 ```
@@ -252,17 +252,17 @@ xcodebuild -sdk iphonesimulator7.1 TARGETED_DEVICE_FAMILY=1 \
 
 [caps]: http://appium.io/slate/en/master/#appium-server-capabilities
 
-```
+```perl
 my $android = {
-    app                 => '/path/to.apk',
-    appActivity         => '.application.MainActivity',
-    appPackage          => 'com.your.android.app',
-    platformName        => 'Android',
-    platformVersion     => '4.4'
+    app             => '/path/to.apk',
+    appActivity     => '.application.MainActivity',
+    appPackage      => 'com.your.android.app',
+    platformName    => 'Android',
+    platformVersion => '4.4'
 };
 ```
 
-```
+```perl
 my $ios = {
     app             => 'http://remote.path/to.app',
     deviceName      => 'iPhone Simulator',
@@ -296,6 +296,19 @@ my $ios = {
 
 * use the right tool for the job
 
+```bash
+$ appium
+info: Welcome to Appium v1.2.0 (REV e53f49c706a25242e66d36685c268b599cc18da5)
+info: Appium REST http interface listener started on 0.0.0.0:4723
+debug: Non-default server args: {"fullReset":true,"logNoColors":true,"avd":"appium"}
+info: LogLevel: debug
+info: --> GET /wd/hub/status {}
+debug: Appium request initiated at /wd/hub/status
+debug: Request received with params: {}
+debug: Responding to client with success: {"status":0,"value":{"build":{"version":"1.2.0","revision":"e53f49c706a25242e66d36685c268b599cc18da5"}}}
+info: <-- GET /wd/hub/status 200 4.053 ms - 104 {"status":0,"value":{"build":{"version":"1.2.0","revision":"e53f49c706a25242e66d36685c268b599cc18da5"}}}
+```
+
 <!-- This kind of falls under using the right tool for the job - when -->
 <!-- I'm authoring a new test, I'm using the GUI app and the inspector -->
 <!-- to drill down through the app and work out the flows. But, when -->
@@ -305,7 +318,7 @@ my $ios = {
 
 --
 
-### get familiar with `arc`! and/or the inspector
+### get familiar with the inspector! and/or `arc`
 
 <!-- and, speaking of the inspector, we'll definitely need to be -->
 <!-- prepared to get pretty familiar with it. The inspector from the -->
@@ -313,10 +326,10 @@ my $ios = {
 <!-- your map to your application. It's got a few quirks but using the -->
 <!-- preview pane has become indispensable for generating locators and -->
 <!-- authoring scripts. -->
-
-* `gem install appium_console`, [\(additional docs\)](http://appium.io/slate/en/tutorial/ios.html?ruby#appium-ruby-console)
-
 <img src="images/inspector.png" width="580px" />
+
+<br />
+`gem install appium_console`, [\(additional docs\)](http://appium.io/slate/en/tutorial/ios.html?ruby#appium-ruby-console)
 
 <!-- Another option is to use the appium_console and its associated -->
 <!-- executable `arc`. ARC is doubly helpful if you're using the ruby -->
@@ -330,9 +343,9 @@ my $ios = {
 
 --
 
-### don't check options you don't understand
+### don't check options you don't understand and then forget
 
-* TODO: add image here
+![show invisible](images/show-invisible.png)
 
 <!-- In one of the older releases of the appium inspector, I was just -->
 <!-- clicking around and saw these two options up here. I thought to -->
@@ -346,8 +359,56 @@ my $ios = {
 <!-- center and I couldn't click through to anything. Then you'll have -->
 <!-- to go and ask google things like "the red boxes in the inspector -->
 <!-- aren't where they're supposed to be" and google won't have any -->
-<!-- clue what you're talking about, and it'll be a mess all around. -->
+<!-- clue what you're talking about, and it'll be a mess all -->
+<!-- around. -->
 
+--
+
+### iOS specific items
+
+* Use accessibilityIdentifier!
+
+* You can resize the iOS emulator ⌘ - 1, ⌘ - 2, ⌘ - 3
+
+<img src="images/ios-100.png" height="300px" />
+<img src="images/ios-75.png" height="300px" />
+<img src="images/ios-50.png" height="300px" />
+
+--
+
+### iOS specific items
+
+* Keep it on top!
+
+![stay in front](images/stay-in-front.png)
+
+* Real iOS device? needs a provisioning profile, UDID, .ipa ... [\(docs\)](http://appium.io/slate/en/master/#appium-on-real-ios-devices)
+
+--
+
+### Android specific items
+
+* Issues re-using Android emulators
+
+```bash
+TARGET=android-19
+ABI=x86
+NAME=appium-avd
+
+echo "Overwriting & creating new emulator..."
+echo no | android create avd --force -n $NAME -t $TARGET --abi $ABI
+# emulator @$NAME &
+```
+
+* Headless android dependency install
+
+```bash
+(while :
+do
+  echo 'y'
+  sleep 2
+done) | android update sdk --no-ui --filter platform-tool,android-19,extra,build-tools-19.1.0
+```
 --
 
 ### additional resources
