@@ -343,24 +343,46 @@ info: <-- GET /wd/hub/status 200 4.053 ms - 104 {"status":0,"value":{"build":{"v
 
 --
 
-### don't check options you don't understand and then forget
+### speed up your tests by using your API
 
-![show invisible](images/show-invisible.png)
+* Make calls to your API for scaffolding or verification
 
-<!-- In one of the older releases of the appium inspector, I was just -->
-<!-- clicking around and saw these two options up here. I thought to -->
-<!-- myself, "oh, I'm pretty advanced at Appium, I'm a power user, -->
-<!-- they wouldn't put something here that would be too -->
-<!-- detrimental. Give me all the information, I'll figure out what to -->
-<!-- do it with," and idly checked these boxes and promptly forgot -->
-<!-- about it. A week later I came back to Appium and the inspector, -->
-<!-- and apparently something funny was going on with my app at the -->
-<!-- time, because suddenly all of the inspection boxes were off -->
-<!-- center and I couldn't click through to anything. Then you'll have -->
-<!-- to go and ask google things like "the red boxes in the inspector -->
-<!-- aren't where they're supposed to be" and google won't have any -->
-<!-- clue what you're talking about, and it'll be a mess all -->
-<!-- around. -->
+<!-- One big thing you can do to speed up your tests is move set up or -->
+<!-- validation out to RESTful calls to your API. We had a case where -->
+<!-- we needed to validate some data was getting properly persisted, -->
+<!-- but it was difficult to access it on the mobile device. So our -->
+<!-- manual test looked like logging in to the mobile device, -->
+<!-- generating the data, and then validating it in an open desktop -->
+<!-- browser. That definitely worked for manual, but when automating -->
+<!-- that, opening a second browser in the same test adds complication -->
+<!-- and time, not to mention an unnecessary dependency on the -->
+<!-- frontend when we're only trying to validate if the data hit the -->
+<!-- backend properly. So that was one case where we were able to use -->
+<!-- our own APIs with a REST call and do away with a lot of -->
+<!-- complexity. -->
+
+* Two small short tests vs one longer (brittle?) one
+
+<!-- An advantage of this is you can break up one longer test with a -->
+<!-- lot of flows into two smaller ones that are either set up or -->
+<!-- validated with REST calls. This is nice because your tests get to -->
+<!-- be more atomic and become easier to debug when their mobile flows -->
+<!-- are simpler. -->
+
+* Focus on functionality
+
+<!-- This sort of gets into a general issue with a lot of webdriver -->
+<!-- tests - it's easy to go down the rabbit hole and over-reach with -->
+<!-- what you're testing. Appium and Webdriver are exceedingly good at -->
+<!-- testing flows and functionality, but not so good at guaranteeing -->
+<!-- layout or positioning. Using Appium to verify elements are -->
+<!-- present takes time and doesn't really gain you much, since the -->
+<!-- layout could easily be sufffering from visual errors that element -->
+<!-- checking doesn't pick up on. -->
+
+<!-- For doing that visual checking, we'd probably want to look into -->
+<!-- validating ith screenshot comparison or something to that effect -->
+<!-- instead. -->
 
 --
 
