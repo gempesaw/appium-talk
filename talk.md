@@ -85,7 +85,7 @@ controls: true
 
 ### huh? what's appium
 
-* mobile is the new focus! so, how do we test it?
+* mobile is the new focus!
 
 <!-- Earlier this year, Sharecare decided to prioritize mobile - both -->
 <!-- for our website and also in the form of new mobile apps. move -->
@@ -93,7 +93,7 @@ controls: true
 <!-- assess the mobile testing frameworks and come up with a workable -->
 <!-- solution. -->
 
-* Need to test Android and iOS apps; QA engineers on OS X & Windows
+* Need to test Android and iOS apps from OS X & Windows
 
 <!-- Like everyone else, we looked at a number of different -->
 <!-- options. We looked briefly into KiF, and we surveyed our options -->
@@ -113,6 +113,8 @@ controls: true
 <!-- browsers. We wanted to re-use those same abstractions and make -->
 <!-- things easy for our QA group to transition to and from mobile testing. -->
 
+* Consistent troubleshooting and open source: both pluses!
+
 <!-- Working with one tool for both iOS and Android would also make -->
 <!-- troubleshooting much easier. Also, using Appium, we'd also get -->
 <!-- all of our existing infrastructure for free - reporting, -->
@@ -120,18 +122,116 @@ controls: true
 
 <!-- Additionally, the fact that Appium was open source made a big -->
 <!-- difference for us as well - being able to interact directly with -->
-<!-- the project authors when diagnosing bugs is pretty invaluable. -->
+<!-- the project authors when diagnosing bugs is pretty -->
+<!-- invaluable. -->
+
+--
+
+### non-Appium solutions ?
+
+<!-- For some of our work, it actually turns out that Appium does have -->
+<!-- the functionality to test, but for various reasons we decided to -->
+<!-- go other routes. One instance was when we were having issues with -->
+<!-- analytics calls on the mobile version of our web app. Appium -->
+<!-- definitely has the ability to automate the actual mobile browsers -->
+<!-- on a mobile device, but it was less attractive for this case -->
+<!-- because our testers for our mobile web app were responsible for a -->
+<!-- much wider range of devices, and they weren't using an OS X -->
+<!-- machine as their main workstation. -->
+
+* Is UserAgent spoofing alone a viable choice?
+
+<!-- Depending on how your mobile web app is determining its content, -->
+<!-- you may have the option of spoofing your desktop browser's user -->
+<!-- agent and having it masquerade as a mobile browser. This is a -->
+<!-- little tricky, because it's possible the behavior on the -->
+<!-- desktop-as-mobile browser isn't an exact match for an actual -->
+<!-- mobile browser, but in our case we were able to reproduce the -->
+<!-- bug on our desktops and avoid going through some of the Appium -->
+<!-- infrastructure setup. -->
+
+* Or, setting the browser size via Webdriver's APIs
+
+<!-- And, if you're in the lucky case where your web app reflows its -->
+<!-- content solely based on browser size, that's happily even easier -->
+<!-- than having to spoof your browser size. We have a small table of -->
+<!-- mobile browser screen sizes, but I'm sure it's possible to look -->
+<!-- 'em up and emulate the mobile device we're hoping to test. -->
+
+* Exactly what the user sees?
+
+<!-- There's definitely a fine line between compromising on testing -->
+<!-- exactly what the user sees, and saving yourself devleopment time -->
+<!-- by testing in a headless browser, or with a spoofed user -->
+<!-- agent. Making that decision really depends on how important the -->
+<!-- functionality is, and what kind of bugs are high risk for that -->
+<!-- feature. -->
 
 --
 
 ### extending our framework
 
-* Started out using our normal webdriver bindings instead of a custom
-  Appium client
+<!-- We started out using our normal webdriver bindings. If you're -->
+<!-- just doing simple tests like we were at first, it's actually -->
+<!-- possible to get a decent amount done without using a specific -->
+<!-- client library. Views with only a few forms or flows that are -->
+<!-- mostly just clicking are pretty easily accomplished with the -->
+<!-- standard Selenium bindings. Early on, this is pretty attractive - -->
+<!-- little to no extra effort and a decently big payoff, especially -->
+<!-- if you're not doing any mobile specific things like hiding the -->
+<!-- keyboard or switching to webviews. -->
+
+* Started out using our normal webdriver bindings
+
+<!-- A big plus for us was that the same way that the standard -->
+<!-- Selenium bindings cover a decent amount of Appium functionality -->
+<!-- also meant that a number of our step rules carried over from -->
+<!-- the desktop version of our framework. So, we get to avoid some -->
+<!-- overhead there for our engineers and re-use the syntax they're -->
+<!-- already used to! -->
 
 * Exactly the same Gherkin step rules
 
-* "Pretty much" drop in!
+<!-- From the front-end of our framework, we were able to make it -->
+<!-- pretty much a transparent drop in. Just choose 'mobile device' as -->
+<!-- the endpoint and we taught our framework how to figure out the -->
+<!-- rest behind the scenes. But, it took a lot of trial and error to -->
+<!-- get everything in place, and I'm going to dig into some of those -->
+<!-- issues that we've learned along the way. -->
+
+* Pretty much a drop in solution at first!
+
+![pretty much drop in](images/drop-in.png)
+
+--
+
+### building your app
+
+<!-- first things first, we'll need an app to test. I'd strongly -->
+<!-- recommend figuring out how to compile your app. This is a -->
+<!-- feedback loop thing - being able to add accessibilityIdentifiers -->
+<!-- in iOS or resource IDs in android and immediately recompiling -->
+<!-- your app make the testing process much smoother. That way, you -->
+<!-- can go to your devs with a PR or a patch and make much quicker -->
+<!-- progress. -->
+
+* control your feedback loop!
+
+`gradle clean assemble`
+
+```
+xcodebuild -sdk iphonesimulator7.1 TARGETED_DEVICE_FAMILY=1 \
+           -arch i386 -config Release | xcpretty
+```
+
+<!-- I personally prefer to be building on the command line, and these -->
+<!-- are the settings that work for me and my projects. But, there's -->
+<!-- definitely other options and configurations for your projects: -->
+<!-- XCode and Android Studio obviously can build your project as -->
+<!-- well, and there are other methods like if you're using PhoneGap -->
+<!-- or Ionic. The point is to shorten your own feedback loop as much -->
+<!-- as possible and with a mobile app, compiling it yourself is -->
+<!-- pretty viable and can make a big difference. -->
 
 --
 
@@ -165,7 +265,7 @@ my $android = {
 ```
 my $ios = {
     app             => 'http://remote.path/to.app',
-    deviceName      => 'iPhone - Simulator - iOS 7.1',
+    deviceName      => 'iPhone Simulator',
     platformName    => 'iOS',
     platformVersion => '7.1'
 };
@@ -182,34 +282,51 @@ my $ios = {
 
 --
 
-### check out them docs
-
-* I'm really excited about the appium docs these days
-
-- slate
-- language toggler
-- fancy
-- looks good!
-- (better than webdriver???)
-
---
-
-### use the right tool for the job
-
-* UserAgent spoofing ? because some of our users are on Windows, but
-also because it may be significantly easier to set up.
-
-* webdriver browser size
-
---
-
 ### play with Appium.app & `appium`
 
+<!-- this is a lot less of a problem with recent Appium releases, but -->
+<!-- some of the early point releases would create issues where I'd -->
+<!-- have trouble with the GUI app on my machine. On the other hand, -->
+<!-- my coworkers had no problems with Appium.app, but had cryptic -->
+<!-- errors from the console version. Both are happily working now, -->
+<!-- but being familiar with both of the options gives you the -->
+<!-- flexibility to keep working in case of an inadvertant update. -->
+
+* insulate yourself from problems
+
+* use the right tool for the job
+
+<!-- This kind of falls under using the right tool for the job - when -->
+<!-- I'm authoring a new test, I'm using the GUI app and the inspector -->
+<!-- to drill down through the app and work out the flows. But, when -->
+<!-- we're running regression tests for the mobile apps, it makes more -->
+<!-- sense to use the console version set up on a grid endpoint -->
+<!-- somewhere instead. -->
+
 --
 
-### expect to get familiar with arc! or the inspector
+### get familiar with `arc`! and/or the inspector
 
-* or both!
+<!-- and, speaking of the inspector, we'll definitely need to be -->
+<!-- prepared to get pretty familiar with it. The inspector from the -->
+<!-- GUI app is like the DevTools console in Chrome or Firefox - it's -->
+<!-- your map to your application. It's got a few quirks but using the -->
+<!-- preview pane has become indispensable for generating locators and -->
+<!-- authoring scripts. -->
+
+* `gem install appium_console`, [\(additional docs\)](http://appium.io/slate/en/tutorial/ios.html?ruby#appium-ruby-console)
+
+<img src="images/inspector.png" width="580px" />
+
+<!-- Another option is to use the appium_console and its associated -->
+<!-- executable `arc`. ARC is doubly helpful if you're using the ruby -->
+<!-- bindings, as the commands issued to arc transfer right over to -->
+<!-- your automation. ARC is a REPL for an appium session, and after -->
+<!-- installing the gem, all you need to do is configure a simple -->
+<!-- appium.txt file with the desired capabilities you want. Invoke -->
+<!-- $ arc and you get an emulator running your app that you can query -->
+<!-- and work with. My coworker Carl Mitchell strongly recommends this -->
+<!-- tool, and I've found it to be very useful as well. -->
 
 --
 
@@ -223,19 +340,22 @@ also because it may be significantly easier to set up.
 <!-- they wouldn't put something here that would be too -->
 <!-- detrimental. Give me all the information, I'll figure out what to -->
 <!-- do it with," and idly checked these boxes and promptly forgot -->
-<!-- about it. A week later I came back to Appium and the inspector-->
+<!-- about it. A week later I came back to Appium and the inspector, -->
+<!-- and apparently something funny was going on with my app at the -->
+<!-- time, because suddenly all of the inspection boxes were off -->
+<!-- center and I couldn't click through to anything. Then you'll have -->
+<!-- to go and ask google things like "the red boxes in the inspector -->
+<!-- aren't where they're supposed to be" and google won't have any -->
+<!-- clue what you're talking about, and it'll be a mess all around. -->
 
 --
 
-### online resources
+### additional resources
 
-* appium-discuss
-* slackchat
+* official documentation: http://appium.io/slate/en/master/
 
---
+* [appium-discuss](https://groups.google.com/forum/#!forum/appium-discuss)
 
-### one script to rule them all?
+* [Appium's HipChat](http://appium.io/chat)
 
-* can we use the same script for iOS and android?
-
-* probably delete this slide
+* Saucelabs' Appium [bootcamp series](http://sauceio.com/index.php/2014/07/appium-bootcamp-get-started-with-appium-testing-chapter-1/) via Dave Haeffner
